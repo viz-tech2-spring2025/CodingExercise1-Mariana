@@ -2,4 +2,4 @@
 
 Template repository containing the starter files and project setup
 
-Hi, I'm Mariana :)
+![alt text](public/sketch.jpg)
