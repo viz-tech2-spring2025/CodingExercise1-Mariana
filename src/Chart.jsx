@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import { useState } from "react";
 
 export function Chart({ data }) {
   const clean = data
@@ -10,6 +11,8 @@ export function Chart({ data }) {
     .slice(0, 20);
 
   const countries = clean.map((d) => d.country);
+
+  const [hovered, setHovered] = useState(null);
 
   console.log(clean);
 
@@ -32,8 +35,6 @@ export function Chart({ data }) {
     .range([marginTop, height - marginBottom])
     .padding(0.5);
 
-  // Filter and process the data
-
   return (
     <div>
       <h2>
@@ -50,6 +51,9 @@ export function Chart({ data }) {
               height={20}
               width={width - x(0) - marginRight}
               fill="#e8f1e4"
+              fillOpacity={hovered ? 0.1 : 1}
+              // onMouseOver={() => setHovered(d.country)}
+              // onMouseLeave={() => setHovered(null)}
               rx="5"
               ry="5"
             />
@@ -61,6 +65,9 @@ export function Chart({ data }) {
               fill="#53c79e"
               rx="5"
               ry="5"
+              fillOpacity={hovered && d.country !== hovered ? 0.1 : 1}
+              onMouseOver={() => setHovered(d.country)}
+              onMouseLeave={() => setHovered(null)}
             />
           </g>
         ))}
